@@ -2,26 +2,22 @@ ZABBIX_RELEASE_VERSION="7.4"
 UBUNTU_VERSION=$(lsb_release -rs)
 
 echo ""
-echo "You are installing the zabbix proxy with sqlite3 support"
+echo "You are installing zabbix proxy with sqlite3 support"
 echo "================================================="
-echo "You are using Ubuntu version ${UBUNTU_VERSION}"
-echo "You are installing the zabbix release ${ZABBIX_RELEASE_VERSION}"
+echo "You are using Ubuntu version: ${UBUNTU_VERSION}"
+echo "You are installing the zabbix release: ${ZABBIX_RELEASE_VERSION}"
 echo "================================================"
 
 ZABBIX_RELEASE="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all"
 
-echo "shell"
-echo $ZABBIX_RELEASE
-exit
-
 echo "Change shell to root"
 sudo -s
 
-echo "Download zabbix version 7.4 source"
+echo "Download zabbix version ${ZABBIX_RELEASE_VERSION} source"
 wget "https://repo.zabbix.com/zabbix/${UBUNTU_VERSION}/release/ubuntu/pool/main/z/zabbix-release/$ZABBIX_RELEASE.deb"
 
 echo "Install the zabbix source package"
-dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
+dpkg -i zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb
 
 echo "Update the apt package manager"
 apt update
