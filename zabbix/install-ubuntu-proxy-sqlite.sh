@@ -32,15 +32,15 @@ if sudo dpkg -s "${ZABBIX_APT_PACKAGE}" | grep -q "install ok installed"; then
 else
     echo "\033[0;32m-> Package '$ZABBIX_APT_PACKAGE' is NOT installed.\033[0m"
     echo "\033[0;32m-> Installing ${ZABBIX_APT_PACKAGE}\033[0m"
-    sudo apt install "${ZABBIX_APT_PACKAGE}" -y
+    sudo apt install "${ZABBIX_APT_PACKAGE}" -y > /dev/null 2>&1
 fi
 
 echo "\033[0;32m-> Set hostname\033[0m"
 read -p "Choose a hostname for zabbix proxy: " hostname
 read -p "Choose the zabbix server: " server
 
-sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
-sed -i 's/^Server=.*$/Server=$server/g' "${ZABBIX_PROXY_CONF}"
+sudo sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
+sudo sed -i 's/^Server=.*$/Server=$server/g' "${ZABBIX_PROXY_CONF}"
 
 echo "\033[0;32m-> Successfully installed ${ZABBIX_APT_PACKAGE}\033[0m"
 echo "\033[0;32m-> Successfully set hostname to '$hostname' in ${ZABBIX_PROXY_CONF}\033[0m"
@@ -48,7 +48,7 @@ echo "\033[0;32m-> Successfully set server address to '$server' in ${ZABBIX_PROX
 
 sudo mkdir -p "/var/lib/zabbix-proxy"
 sudo chown -R zabbix:zabbix /var/lib/zabbix-proxy
-sed -i 's/^DBname=.*$/DBname=\/var\/lib\/zabbix-proxy\/database.sqlite3/g' "${ZABBIX_PROXY_CONF}"
+sudo sed -i 's/^DBname=.*$/DBname=\/var\/lib\/zabbix-proxy\/database.sqlite3/g' "${ZABBIX_PROXY_CONF}"
 
 echo "\033[0;32m-> Successfully set sqlite3 database to /var/lib/zabbix-proxy/database.sqlite3\033[0m"
 sudo systemctl enable zabbix-proxy >/dev/null 2>&1
