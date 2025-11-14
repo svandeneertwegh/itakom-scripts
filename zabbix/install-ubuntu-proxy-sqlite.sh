@@ -16,21 +16,13 @@ echo -e "\033[0;32m-> You are using Ubuntu version: ${UBUNTU_VERSION}\033[0m"
 echo -e "\033[0;32m-> You are installing the zabbix release: ${ZABBIX_RELEASE_VERSION}\033[0m"
 echo -e "\033[0;32m-> ================================================\033[0m"
 
-if dpkg-query -l "$PACKAGE_NAME_SHORT" >/dev/null 2>&1; then
-    echo -e "\033[0;32m-> Package '$PACKAGE_NAME_SHORT' is already installed.\033[0m"
-    echo -e "\033[0;32m-> Latest zabbix release is already installed\033[0m"
-    exit
-else
-    echo -e "\033[0;32m-> Package '$PACKAGE_NAME_SHORT' is NOT installed.\033[0m"
-    echo -e "\033[0;32m-> Trying to install latest release\033[0m"
-    echo -e "\033[0;32m-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository\033[0m"
-    sudo wget -O - "$ZABBIX_REPOSITORY_URL" | sudo tee "$DEST_PATH" > /dev/null
-    echo -e "\033[0;32m-> Install the zabbix source package\033[0m"
-    sudo dpkg -i "${DEST_PATH}"
-    echo -e "\033[0;32m-> Remove obsolete zabbix source package\033[0m"
-    sudo rm "${DEST_PATH}"
-fi 
-
+echo -e "\033[0;32m-> Trying to install latest release\033[0m"
+echo -e "\033[0;32m-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository\033[0m"
+sudo wget -O - "${ZABBIX_REPOSITORY_URL}" | sudo tee "${DEST_PATH}" > /dev/null
+echo -e "\033[0;32m-> Install the zabbix source package\033[0m"
+sudo dpkg -i "${DEST_PATH}"
+echo -e "\033[0;32m-> Remove obsolete zabbix source package\033[0m"
+sudo rm "${DEST_PATH}"
 
 echo -e "\033[0;32m-> Update the apt package manager\033[0m"
 sudo apt update
