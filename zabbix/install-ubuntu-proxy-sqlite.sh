@@ -37,26 +37,33 @@ else
     echo "done"
 fi
 
-echo "\033[0;32m-> Set hostname\033[0m"
-read -p "Choose a hostname for zabbix proxy: " hostname
-read -p "Choose the zabbix server: " server
+read -p "Configure zabbix-proxy? y/n" answer
 
-sudo sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
-sudo sed -i 's/^Server=.*$/Server=$server/g' "${ZABBIX_PROXY_CONF}"
+if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
 
-echo "\033[0;32m-> Successfully installed ${ZABBIX_APT_PACKAGE}\033[0m"
-echo "\033[0;32m-> Successfully set hostname to '$hostname' in ${ZABBIX_PROXY_CONF}\033[0m"
-echo "\033[0;32m-> Successfully set server address to '$server' in ${ZABBIX_PROXY_CONF}\033[0m"
+    echo "\033[0;32m-> Set hostname\033[0m"
+    read -p "Choose a hostname for zabbix proxy " hostname
+    read -p "Choose the zabbix server " server
 
-sudo mkdir -p "/var/lib/zabbix-proxy"
-echo "\033[0;32m-> Successfully made folder '/var/lib/zabbix-proxy'\033[0m"
-sudo chown -R zabbix:zabbix /var/lib/zabbix-proxy
-echo "\033[0;32m-> Successfully set owner of folder to zabbix\033[0m"
+    sudo sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
+    sudo sed -i 's/^Server=.*$/Server=$server/g' "${ZABBIX_PROXY_CONF}"
 
-sudo sed -i 's/^DBname=.*$/DBname=\/var\/lib\/zabbix-proxy\/database.sqlite3/g' "${ZABBIX_PROXY_CONF}"
+    echo "\033[0;32m-> Successfully installed ${ZABBIX_APT_PACKAGE}\033[0m"
+    echo "\033[0;32m-> Successfully set hostname to '$hostname' in ${ZABBIX_PROXY_CONF}\033[0m"
+    echo "\033[0;32m-> Successfully set server address to '$server' in ${ZABBIX_PROXY_CONF}\033[0m"
 
-echo "\033[0;32m-> Successfully set sqlite3 database to /var/lib/zabbix-proxy/database.sqlite3\033[0m"
-sudo systemctl enable zabbix-proxy >/dev/null 2>&1
-sudo systemctl restart zabbix-proxy >/dev/null 2>&1
-echo "\033[0;32m-> Successfully enabled autostart from boot and started it\033[0m"
+    sudo mkdir -p "/var/lib/zabbix-proxy"
+    echo "\033[0;32m-> Successfully made folder '/var/lib/zabbix-proxy'\033[0m"
+    sudo chown -R zabbix:zabbix /var/lib/zabbix-proxy
+    echo "\033[0;32m-> Successfully set owner of folder to zabbix\033[0m"
+
+    sudo sed -i 's/^DBname=.*$/DBname=\/var\/lib\/zabbix-proxy\/database.sqlite3/g' "${ZABBIX_PROXY_CONF}"
+
+    echo "\033[0;32m-> Successfully set sqlite3 database to /var/lib/zabbix-proxy/database.sqlite3\033[0m"
+    sudo systemctl enable zabbix-proxy >/dev/null 2>&1
+    sudo systemctl restart zabbix-proxy >/dev/null 2>&1
+    echo "\033[0;32m-> Successfully enabled autostart from boot and started it\033[0m"
+else
+  echo ""
+fi
 echo "\033[0;32m-> End script!\033[0m"
