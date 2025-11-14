@@ -37,13 +37,13 @@ else
     echo "done"
 fi
 
-read -p "Configure zabbix-proxy? y/n" answer
+read -p "Configure zabbix-proxy? [y/n]: " answer
 
-if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
+if [[ "$answer" == "y" ]]; then
 
     echo "\033[0;32m-> Set hostname\033[0m"
-    read -p "Choose a hostname for zabbix proxy " hostname
-    read -p "Choose the zabbix server " server
+    read -p "Choose a hostname for zabbix proxy: " hostname
+    read -p "Choose the zabbix server: " server
 
     sudo sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
     sudo sed -i 's/^Server=.*$/Server=$server/g' "${ZABBIX_PROXY_CONF}"
