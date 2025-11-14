@@ -1,7 +1,9 @@
+ZABBIX_RELEASE="zabbix-release_latest_7.4+ubuntu24.04_all"
+
 ZABBIX_RELEASE_VERSION="7.4"
 UBUNTU_VER=$(lsb_release -rs)
 
-ZABBIX_RELEASE="zabbix-release_latest_{$ZABBIX_RELEASE_VERSION}+ubuntu{$UBUNTU_VER}_all"
+ZABBIX_RELEASE="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VER}_all"
 
 echo "shell"
 echo $ZABBIX_RELEASE
