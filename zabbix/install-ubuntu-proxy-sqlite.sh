@@ -4,6 +4,7 @@ ZABBIX_RELEASE_VERSION="7.4"
 UBUNTU_VERSION=$(lsb_release -rs)
 PACKAGE_NAME="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb"
 ZABBIX_REPOSITORY_URL="https://repo.zabbix.com/zabbix/${ZABBIX_RELEASE_VERSION}/release/ubuntu/pool/main/z/zabbix-release/${PACKAGE_NAME}"
+DEST_PATH="/tmp"
 
 echo "-> "
 echo "-> You are installing zabbix proxy with sqlite3 support"
@@ -21,7 +22,7 @@ else
     echo "-> Trying to install latest release"
     echo "-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository"
     echo $ZABBIX_REPOSITORY_URL;
-    sudo wget -O - "$ZABBIX_REPOSITORY_URL"
+    sudo wget -O - "$ZABBIX_REPOSITORY_URL" | sudo tee "$DEST_PATH" > /dev/null
     echo "-> Install the zabbix source package"
     sudo dpkg -i $ZABBIX_RELEASE_DEB
     echo "-> Remove obsolete zabbix source package"
