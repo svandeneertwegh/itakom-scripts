@@ -55,8 +55,8 @@ if [ "$answer" = "y" ]; then
     read -p "Choose a hostname for zabbix proxy: " hostname
     read -p "Choose the zabbix server: " server
 
-    sudo sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
-    sudo sed -i 's/^Server=.*$/Server=$server/g' "${ZABBIX_PROXY_CONF}"
+    sudo sed -i "s/^Hostname=.*$/Hostname=$hostname/g" "${ZABBIX_PROXY_CONF}"
+    sudo sed -i "s/^Server=.*$/Server=$server/g" "${ZABBIX_PROXY_CONF}"
 
     echo "\033[0;32m-> Successfully installed ${ZABBIX_APT_PACKAGE}\033[0m"
     echo "\033[0;32m-> Successfully set hostname to '$hostname' in ${ZABBIX_PROXY_CONF}\033[0m"
