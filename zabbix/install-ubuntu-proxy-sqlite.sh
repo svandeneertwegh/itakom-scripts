@@ -27,7 +27,7 @@ sudo rm "${DEST_PATH}"
 echo -e "\033[0;32m-> Update the apt package manager\033[0m"
 sudo apt update
 
-if sudo dpkg-query -l "$ZABBIX_APT_PACKAGE" >/dev/null 2>&1; then
+if sudo dpkg -s "${ZABBIX_APT_PACKAGE}" | grep -q "install ok installed"; then
     echo "\033[0;32mPackage '$ZABBIX_APT_PACKAGE' is already installed.\033[0m"
     exit;
 
