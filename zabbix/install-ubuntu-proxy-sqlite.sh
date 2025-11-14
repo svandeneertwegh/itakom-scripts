@@ -29,6 +29,14 @@ sudo apt update >/dev/null 2>&1
 echo "done"
 if sudo dpkg -s "${ZABBIX_APT_PACKAGE}" | grep -q "install ok installed"; then
     echo "\033[0;32m-> Package '$ZABBIX_APT_PACKAGE' is already installed.\033[0m"
+    read -p "Try to upgrade the '$ZABBIX_APT_PACKAGE' package? [y/n]: " try
+    if [ "$try" = "y" ]; then
+      if sudo apt list --upgradable 2>/dev/null | grep -q "$ZABBIX_APT_PACKAGE"; then
+          sudo apt upgrade "$ZABBIX_APT_PACKAGE" >/dev/null 2>&1
+          echo "\033[0;32m-> Package '$ZABBIX_APT_PACKAGE' is succesfull upgraded!\033[0m"
+          sudo apt systemctl restart zabbix-proxy
+          echo "\033[0;32m-> Successfully restarted zabbix-proxy!\033[0m"
+        fi
     exit;
 
 else
