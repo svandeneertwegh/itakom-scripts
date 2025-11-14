@@ -37,6 +37,7 @@ if sudo dpkg -s "${ZABBIX_APT_PACKAGE}" | grep -q "install ok installed"; then
           sudo apt systemctl restart zabbix-proxy
           echo "\033[0;32m-> Successfully restarted zabbix-proxy!\033[0m"
         fi
+    fi
     exit;
 
 else
