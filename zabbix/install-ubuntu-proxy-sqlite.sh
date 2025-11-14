@@ -38,10 +38,13 @@ else
 fi
 
 echo -e "\033[0;32m-> Set hostname\033[0m"
-read -p "Choose a hostname for zabbix proxy: \n" yn
-echo $yn
+read -p "Choose a hostname for zabbix proxy: \n" hostname
 
-sed -i 's/DBName=(.*)/DBName=$yn/g' "${ZABBIX_PROXY_CONF}"
+sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
 
 echo -e "\033[0;32m-> Successfully installed ${ZABBIX_APT_PACKAGE}\033[0m"
 echo -e "\033[0;32m-> Successfully set hostname in ${ZABBIX_PROXY_CONF}\033[0m"
+sudo systemctl enable zabbix-proxy
+sudo systemctl restart zabbix-proxy
+echo -e "\033[0;32m-> Successfully enabled autostart from boot and started it\033[0m"
+echo -e "\033[0;32m-> End script!\033[0m"
