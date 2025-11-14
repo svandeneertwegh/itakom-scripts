@@ -14,12 +14,10 @@ echo "\033[0;32m-> =================================================\033[0m"
 echo "\033[0;32m-> You are using Ubuntu version: ${UBUNTU_VERSION}\033[0m"
 echo "\033[0;32m-> You are installing the zabbix release: ${ZABBIX_RELEASE_VERSION}\033[0m"
 echo "\033[0;32m-> ================================================\033[0m"
-
-echo "\033[0;32m-> Trying to install latest release\033[0m"
 echo "\033[0;32m-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository\033[0m"
 sudo wget "${ZABBIX_REPOSITORY_URL}" >/dev/null 2>&1
 echo "done"
-echo "\033[0;32m-> Installing the zabbix source package\033[0m"
+echo "\033[0;32m-> Installing the zabbix apt repository package\033[0m"
 sudo dpkg -i "${PACKAGE_NAME}" >/dev/null 2>&1
 echo "done"
 sudo rm "${PACKAGE_NAME}" >/dev/null 2>&1
