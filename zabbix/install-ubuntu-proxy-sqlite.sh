@@ -17,14 +17,15 @@ echo "\033[0;32m-> ================================================\033[0m"
 echo "\033[0;32m-> Trying to install latest release\033[0m"
 echo "\033[0;32m-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository\033[0m"
 sudo wget "${ZABBIX_REPOSITORY_URL}" >/dev/null 2>&1
-echo "\033[0;32m-> Install the zabbix source package\033[0m"
+echo "done"
+echo "\033[0;32m-> Installing the zabbix source package\033[0m"
 sudo dpkg -i "${PACKAGE_NAME}" >/dev/null 2>&1
-echo "\033[0;32m-> Remove obsolete zabbix source package\033[0m"
+echo "done"
 sudo rm "${PACKAGE_NAME}" >/dev/null 2>&1
 
 echo "\033[0;32m-> Update the apt package manager\033[0m"
 sudo apt update >/dev/null 2>&1
-
+echo "done"
 if sudo dpkg -s "${ZABBIX_APT_PACKAGE}" | grep -q "install ok installed"; then
     echo "\033[0;32m-> Package '$ZABBIX_APT_PACKAGE' is already installed.\033[0m"
     exit;
@@ -33,6 +34,7 @@ else
     echo "\033[0;32m-> Package '$ZABBIX_APT_PACKAGE' is NOT installed.\033[0m"
     echo "\033[0;32m-> Installing ${ZABBIX_APT_PACKAGE}\033[0m"
     sudo apt install "${ZABBIX_APT_PACKAGE}" -y > /dev/null 2>&1
+    echo "done"
 fi
 
 echo "\033[0;32m-> Set hostname\033[0m"
