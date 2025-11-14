@@ -11,9 +11,15 @@ echo "You are installing the zabbix release: ${ZABBIX_RELEASE_VERSION}"
 echo "================================================"
 
 ZABBIX_RELEASE_DEB="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb"
+ZABBIX_REPOSITORY_URL="https://repo.zabbix.com/zabbix/${UBUNTU_VERSION}/release/ubuntu/pool/main/z/zabbix-release/${ZABBIX_RELEASE_DEB}"
 
-echo "Download zabbix version ${ZABBIX_RELEASE_VERSION} source"
-sudo wget "https://repo.zabbix.com/zabbix/${UBUNTU_VERSION}/release/ubuntu/pool/main/z/zabbix-release/${ZABBIX_RELEASE_DEB}"
+echo "Download zabbix version ${ZABBIX_RELEASE_VERSION} apt repository"
+
+echo ${ZABBIX_REPOSITORY_URL}
+
+exit;
+
+sudo wget ${ZABBIX_REPOSITORY_URL}
 
 echo "Install the zabbix source package"
 sudo dpkg -i $ZABBIX_RELEASE_DEB
