@@ -36,12 +36,15 @@ else
 fi
 
 echo -e "\033[0;32m-> Set hostname\033[0m"
-read -p "Choose a hostname for zabbix proxy: \n" hostname
+read -p "Choose a hostname for zabbix proxy: " hostname
+read -p "Choose the zabbix server: " server
 
 sed -i 's/^Hostname=.*$/Hostname=$hostname/g' "${ZABBIX_PROXY_CONF}"
+sed -i 's/^Server=.*$/Server=$server/g' "${ZABBIX_PROXY_CONF}"
 
 echo -e "\033[0;32m-> Successfully installed ${ZABBIX_APT_PACKAGE}\033[0m"
-echo -e "\033[0;32m-> Successfully set hostname in ${ZABBIX_PROXY_CONF}\033[0m"
+echo -e "\033[0;32m-> Successfully set hostname to '$hostname' in ${ZABBIX_PROXY_CONF}\033[0m"
+echo -e "\033[0;32m-> Successfully set server address to '$server' in ${ZABBIX_PROXY_CONF}\033[0m"
 
 sudo mkdir -p "/var/lib/zabbix-proxy"
 sudo chown -R zabbix:zabbix /var/lib/zabbix-proxy
