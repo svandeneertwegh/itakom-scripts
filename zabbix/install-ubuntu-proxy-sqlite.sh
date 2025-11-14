@@ -39,7 +39,7 @@ fi
 
 read -p "Configure zabbix-proxy? [y/n]: " answer
 
-if [[ "$answer" == "y" ]]; then
+if [ "$answer" = "y" ]; then
 
     echo "\033[0;32m-> Set hostname\033[0m"
     read -p "Choose a hostname for zabbix proxy: " hostname
