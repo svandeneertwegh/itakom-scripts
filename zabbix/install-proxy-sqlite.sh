@@ -1,8 +1,19 @@
+ZABBIX_RELEASE="zabbix-release_latest_7.4+ubuntu24.04_all"
+
+ZABBIX_RELEASE_VERSION="7.4"
+UBUNTU_VER=$(lsb_release -rs)
+
+ZABBIX_RELEASE="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu{$UBUNTU_VER}_all"
+
+echo "shell"
+echo $ZABBIX_RELEASE
+exit
+
 echo "Change shell to root"
 sudo -s
 
 echo "Download zabbix version 7.4 source"
-wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb
+wget "https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/$ZABBIX_RELEASE.deb"
 
 echo "Install the zabbix source package"
 dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
@@ -12,6 +23,8 @@ apt update
 
 echo "Install zabbix proxy with sqlite support"
 apt install zabbix-proxy-sqlite3
+
+rm $
 
 echo "Set hostname"
 read -p "Choose a hostname for zabbix proxy " yn
