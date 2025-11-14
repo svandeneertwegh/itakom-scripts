@@ -24,9 +24,9 @@ else
     echo $ZABBIX_REPOSITORY_URL;
     sudo wget -O - "$ZABBIX_REPOSITORY_URL" | sudo tee "$DEST_PATH" > /dev/null
     echo "-> Install the zabbix source package"
-    sudo dpkg -i $ZABBIX_RELEASE_DEB
+    sudo dpkg -i "${DEST_PATH}"
     echo "-> Remove obsolete zabbix source package"
-    sudo rm $ZABBIX_RELEASE_DEB
+    sudo rm "${DEST_PATH}"
 fi 
 
 
