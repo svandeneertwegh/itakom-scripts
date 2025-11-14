@@ -10,14 +10,11 @@ echo "================================================"
 
 ZABBIX_RELEASE="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all"
 
-echo "Change shell to root"
-sudo -s
-
 echo "Download zabbix version ${ZABBIX_RELEASE_VERSION} source"
 wget "https://repo.zabbix.com/zabbix/${UBUNTU_VERSION}/release/ubuntu/pool/main/z/zabbix-release/$ZABBIX_RELEASE.deb"
 
 echo "Install the zabbix source package"
-dpkg -i zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb
+sudo dpkg -i zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb
 
 echo "Update the apt package manager"
 apt update
