@@ -7,6 +7,7 @@ ZABBIX_REPOSITORY_URL="https://repo.zabbix.com/zabbix/${ZABBIX_RELEASE_VERSION}/
 ZABBIX_APT_PACKAGE="zabbix-proxy-sqlite3"
 ZABBIX_PROXY_CONF="/etc/zabbix/zabbix_proxy.conf"
 
+echo "\033[0;32mStart install script\033[0m"
 echo "\033[0;32m-> \033[0m"
 echo "\033[0;32m-> You are installing zabbix proxy with sqlite3 support\033[0m"
 echo "\033[0;32m-> =================================================\033[0m"
