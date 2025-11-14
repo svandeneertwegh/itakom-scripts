@@ -16,22 +16,22 @@ echo -e "\033[0;32m-> ================================================\033[0m"
 
 echo -e "\033[0;32m-> Trying to install latest release\033[0m"
 echo -e "\033[0;32m-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository\033[0m"
-sudo wget "${ZABBIX_REPOSITORY_URL}"
+sudo wget "${ZABBIX_REPOSITORY_URL}" >/dev/null 2>&1
 echo -e "\033[0;32m-> Install the zabbix source package\033[0m"
-sudo dpkg -i "${PACKAGE_NAME}"
+sudo dpkg -i "${PACKAGE_NAME}" >/dev/null 2>&1
 echo -e "\033[0;32m-> Remove obsolete zabbix source package\033[0m"
-sudo rm "${PACKAGE_NAME}"
+sudo rm "${PACKAGE_NAME}" >/dev/null 2>&1
 
 echo -e "\033[0;32m-> Update the apt package manager\033[0m"
-sudo apt update
+sudo apt update >/dev/null 2>&1
 
 if sudo dpkg -s "${ZABBIX_APT_PACKAGE}" | grep -q "install ok installed"; then
-    echo "\033[0;32mPackage '$ZABBIX_APT_PACKAGE' is already installed.\033[0m"
+    echo "\033[0;32m-> Package '$ZABBIX_APT_PACKAGE' is already installed.\033[0m"
     exit;
 
 else
-    echo "\033[0;32mPackage '$ZABBIX_APT_PACKAGE' is NOT installed.\033[0m"
-    echo "\033[0;32mInstalling ${ZABBIX_APT_PACKAGE}\033[0m"
+    echo "\033[0;32m-> Package '$ZABBIX_APT_PACKAGE' is NOT installed.\033[0m"
+    echo "\033[0;32m-> Installing ${ZABBIX_APT_PACKAGE}\033[0m"
     sudo apt install "${ZABBIX_APT_PACKAGE}" -y
 fi
 
@@ -51,7 +51,7 @@ sudo chown -R zabbix:zabbix /var/lib/zabbix-proxy
 sed -i 's/^DBname=.*$/DBname=/var/lib/zabbix-proxy/database.sqlite3/g' "${ZABBIX_PROXY_CONF}"
 
 echo -e "\033[0;32m-> Successfully set sqlite3 database to /var/lib/zabbix-proxy/database.sqlite3\033[0m"
-sudo systemctl enable zabbix-proxy
-sudo systemctl restart zabbix-proxy
+sudo systemctl enable zabbix-proxy >/dev/null 2>&1
+sudo systemctl restart zabbix-proxy >/dev/null 2>&1
 echo -e "\033[0;32m-> Successfully enabled autostart from boot and started it\033[0m"
 echo -e "\033[0;32m-> End script!\033[0m"
