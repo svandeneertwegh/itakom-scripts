@@ -2,10 +2,8 @@
 
 ZABBIX_RELEASE_VERSION="7.4"
 UBUNTU_VERSION=$(lsb_release -rs)
-PACKAGE_NAME_SHORT="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all"
 PACKAGE_NAME="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb"
 ZABBIX_REPOSITORY_URL="https://repo.zabbix.com/zabbix/${ZABBIX_RELEASE_VERSION}/release/ubuntu/pool/main/z/zabbix-release/${PACKAGE_NAME}"
-DEST_PATH="/tmp/${PACKAGE_NAME}"
 ZABBIX_APT_PACKAGE="zabbix-proxy-sqlite3"
 ZABBIX_PROXY_CONF="/etc/zabbix/zabbix_proxy.conf"
 
@@ -18,11 +16,11 @@ echo -e "\033[0;32m-> ================================================\033[0m"
 
 echo -e "\033[0;32m-> Trying to install latest release\033[0m"
 echo -e "\033[0;32m-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository\033[0m"
-sudo wget -O - "${ZABBIX_REPOSITORY_URL}" | sudo tee "${DEST_PATH}" > /dev/null
+sudo wget "${ZABBIX_REPOSITORY_URL}"
 echo -e "\033[0;32m-> Install the zabbix source package\033[0m"
-sudo dpkg -i "${DEST_PATH}"
+sudo dpkg -i "${PACKAGE_NAME}"
 echo -e "\033[0;32m-> Remove obsolete zabbix source package\033[0m"
-sudo rm "${DEST_PATH}"
+sudo rm "${PACKAGE_NAME}"
 
 echo -e "\033[0;32m-> Update the apt package manager\033[0m"
 sudo apt update
