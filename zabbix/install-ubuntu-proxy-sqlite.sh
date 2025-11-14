@@ -6,37 +6,37 @@ PACKAGE_NAME="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VER
 ZABBIX_REPOSITORY_URL="https://repo.zabbix.com/zabbix/${ZABBIX_RELEASE_VERSION}/release/ubuntu/pool/main/z/zabbix-release/${PACKAGE_NAME}"
 DEST_PATH="/tmp/${PACKAGE_NAME}"
 
-echo "-> "
-echo "-> You are installing zabbix proxy with sqlite3 support"
-echo "-> ================================================="
-echo "-> You are using Ubuntu version: ${UBUNTU_VERSION}"
-echo "-> You are installing the zabbix release: ${ZABBIX_RELEASE_VERSION}"
-echo "-> ================================================"
+echo -e "033[0;32m-> 033[0m"
+echo -e "033[0;32m-> You are installing zabbix proxy with sqlite3 support033[0m"
+echo -e "033[0;32m-> =================================================033[0m"
+echo -e "033[0;32m-> You are using Ubuntu version: ${UBUNTU_VERSION}033[0m"
+echo -e "033[0;32m-> You are installing the zabbix release: ${ZABBIX_RELEASE_VERSION}033[0m"
+echo -e "033[0;32m-> ================================================033[0m"
 
 if dpkg-query -l "$PACKAGE_NAME" >/dev/null 2>&1; then
-    echo "-> Package '$PACKAGE_NAME' is already installed."
-    echo "-> Latest zabbix release is already installed"
+    echo -e "033[0;32m-> Package '$PACKAGE_NAME' is already installed.033[0m"
+    echo -e "033[0;32m-> Latest zabbix release is already installed033[0m"
     exit
 else
-    echo "-> Package '$PACKAGE_NAME' is NOT installed."
-    echo "-> Trying to install latest release"
-    echo "-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository"
+    echo -e "033[0;32m-> Package '$PACKAGE_NAME' is NOT installed.033[0m"
+    echo -e "033[0;32m-> Trying to install latest release033[0m"
+    echo -e "033[0;32m-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository033[0m"
     echo $ZABBIX_REPOSITORY_URL;
     sudo wget -O - "$ZABBIX_REPOSITORY_URL" | sudo tee "$DEST_PATH" > /dev/null
-    echo "-> Install the zabbix source package"
+    echo -e "033[0;32m-> Install the zabbix source package033[0m"
     sudo dpkg -i "${DEST_PATH}"
-    echo "-> Remove obsolete zabbix source package"
+    echo -e "033[0;32m-> Remove obsolete zabbix source package033[0m"
     sudo rm "${DEST_PATH}"
 fi 
 
 
-echo "-> Update the apt package manager"
+echo -e "033[0;32m-> Update the apt package manager033[0m"
 sudo apt update
 
-echo "-> Install zabbix proxy with sqlite support"
+echo -e "033[0;32m-> Install zabbix proxy with sqlite support033[0m"
 sudo apt install zabbix-proxy-sqlite3
 
-echo "-> Set hostname"
+echo -e "033[0;32m-> Set hostname033[0m"
 read -p "Choose a hostname for zabbix proxy: " yn
 echo $yn
 
