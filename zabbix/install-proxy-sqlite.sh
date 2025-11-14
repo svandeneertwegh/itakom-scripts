@@ -1,7 +1,8 @@
 ZABBIX_RELEASE_VERSION="7.4"
 UBUNTU_VERSION=$(lsb_release -rs)
 
-echo -e "You are installing the zabbix proxy with sqlite3 support"
+echo ""
+echo "You are installing the zabbix proxy with sqlite3 support"
 echo "================================================="
 echo "You are using Ubuntu version ${UBUNTU_VERSION}"
 echo "You are installing the zabbix release ${ZABBIX_RELEASE_VERSION}"
