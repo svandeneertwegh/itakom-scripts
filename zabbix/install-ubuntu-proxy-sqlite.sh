@@ -20,6 +20,7 @@ else
     echo "-> Package '$PACKAGE_NAME' is NOT installed."
     echo "-> Trying to install latest release"
     echo "-> Downloading zabbix version ${ZABBIX_RELEASE_VERSION} apt repository"
+    echo $ZABBIX_REPOSITORY_URL;
     sudo wget $ZABBIX_REPOSITORY_URL
     echo "-> Install the zabbix source package"
     sudo dpkg -i $ZABBIX_RELEASE_DEB
