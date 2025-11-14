@@ -2,9 +2,8 @@
 
 ZABBIX_RELEASE_VERSION="7.4"
 UBUNTU_VERSION=$(lsb_release -rs)
-PACKAGE_NAME="zabbix-release_latest_${UBUNTU_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb"
+PACKAGE_NAME="zabbix-release_latest_${ZABBIX_RELEASE_VERSION}+ubuntu${UBUNTU_VERSION}_all.deb"
 ZABBIX_REPOSITORY_URL="https://repo.zabbix.com/zabbix/${UBUNTU_VERSION}/release/ubuntu/pool/main/z/zabbix-release/${PACKAGE_NAME}"
-APT_REPO_INSTALL_FLAG=0
 
 echo "-> "
 echo "-> You are installing zabbix proxy with sqlite3 support"
