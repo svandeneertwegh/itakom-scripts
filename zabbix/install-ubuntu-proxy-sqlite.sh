@@ -67,7 +67,7 @@ if [ "$answer" = "y" ]; then
     sudo chown -R zabbix:zabbix /var/lib/zabbix-proxy
     echo "-> Successfully set owner of folder to zabbix"
 
-    sudo sed -i 's/^DBname=.*$/DBname=\/var\/lib\/zabbix-proxy\/database.sqlite3/g' "${ZABBIX_PROXY_CONF}"
+    sudo sed -i 's|^DBName=.*|DBName=/var/lib/zabbix_proxy/database.sqlite3|g' "${ZABBIX_PROXY_CONF}"
 
     echo "-> Successfully set sqlite3 database to /var/lib/zabbix-proxy/database.sqlite3"
     sudo systemctl enable zabbix-proxy >/dev/null 2>&1
