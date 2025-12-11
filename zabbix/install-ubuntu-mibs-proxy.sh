@@ -18,6 +18,8 @@ sudo apt install "${SNMP_APT_PACKAGE}" -y > /dev/null 2>&1
 echo "done"
 echo "Location of custom-mibs on this system is:"
 echo "${UBUNTU_SNMP_MIBS_PATH}"
+echo "-> Now downloading the mibs using the snmp-mibs-downloader"
+sudo download-mibs >/dev/null 2>&1
 echo "Now copying the custom mibs to the above path"
 sudo cp -rf custom-mibs/*.txt ${UBUNTU_SNMP_MIBS_PATH}
 echo "-> Remove the disabled snmp mibs loader"
